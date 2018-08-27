@@ -5,7 +5,10 @@ require "fileutils"
 task :default => :clean do
   # Download and compile librdkafka
   recipe = MiniPortile.new("librdkafka", Rdkafka::LIBRDKAFKA_VERSION)
-  recipe.files = ["https://github.com/edenhill/librdkafka/archive/v#{Rdkafka::LIBRDKAFKA_VERSION}.tar.gz"]
+  recipe.files << {
+    url: "https://storage.googleapis.com/blendle-builds/github.com/edenhill/librdkafka/librdkafka-#{Rdkafka::LIBRDKAFKA_VERSION}.tar.gz",
+    sha256: Rdkafka::LIBRDKAFKA_SHA256_CHECKSUM
+  }
   recipe.configure_options = ["--host=#{recipe.host}"]
   recipe.cook
   # Move dynamic library we're interested in
