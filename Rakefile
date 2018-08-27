@@ -1,4 +1,5 @@
 require "./lib/rdkafka"
+require 'gemfury/tasks'
 
 task :create_topics do
   puts "Creating test topics"
